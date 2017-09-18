@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import '../App.css';
 import SearchForm from './SearchForm'
 import Results from './Results'
 
@@ -11,7 +10,7 @@ class App extends Component {
     this.state = {
       searchInput: '',
       searchResults: [],
-      defaultData: this.props.data,
+      siteData: this.props.data,
       categories: this.props.categories
     }
     // console.log(this.state.defaultdata)
@@ -29,7 +28,7 @@ class App extends Component {
         })
       }
       else {
-        this.state.defaultData.forEach(function(site){
+        this.state.siteData.forEach(function(site){
           //if siteName matches query name, push to queryResult
           if (site.siteName.toLowerCase().indexOf(input) != -1) {
             queryResult.push(site);
