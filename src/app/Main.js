@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import SearchForm from './SearchForm'
 import Results from './Results'
+import Header from './Header'
+import Footer from './Footer'
 
 class Main extends Component {
 
@@ -86,10 +88,13 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="Container">
-        <h2>Search Container</h2>
-        <SearchForm searchInput={this.searchInput}/>
-        <Results results={this.state.searchResults}/>
+      <div className="big_container">
+          <Header />
+            <div className="container_inner">
+              <SearchForm searchInput={this.searchInput}/>
+              <Results results={this.state.searchResults}/>
+            </div>
+          <Footer />
       </div>
     );
   }

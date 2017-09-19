@@ -11,7 +11,12 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <input type="text" value={this.props.input} ref={(input) => {this.titleInput = input}}  onChange={this.getSearchInput.bind(this)} className="search_input" placeholder="Search"/>
+      <div className="search_form_container">
+        <div className="container">
+            <input type="text" value={this.props.input} ref={(input) => {this.titleInput = input}}  onChange={this.getSearchInput.bind(this)} className="search_input" placeholder="Search Publishers"/>
+            <a onClick={this.getSearchInput} className="search_button"><span className="glyphicon glyphicon-search"></span></a>
+        </div>
+      </div>
     )
   }
 
