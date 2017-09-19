@@ -4,6 +4,7 @@ import SearchForm from './SearchForm'
 import Results from './Results'
 import Header from './Header'
 import Footer from './Footer'
+import $ from 'jquery'
 
 class Main extends Component {
 
@@ -15,65 +16,80 @@ class Main extends Component {
       siteData: this.props.data,
       categories: this.props.categories
     }
-    // console.log(this.state.defaultdata)
-    console.log(this.state.categories)
   }
 
+  // Function to find results based on user's input
   searchInput = (input) => {
-  		var queryResult = [];
-      var categoryList = this.state.categories
       input = input.toLowerCase()
+      var categoryList = this.state.categories
 
-      var inputList = []
+      // Initiate Array to store relevant search results
+  		var queryResult = [];
+
+      // To enable multi keyword search, we split user's input text/string and convert it into an array
+      var inputList = [];
       inputList = input.split(',');
-      console.log(inputList)
+        console.log(inputList)
 
+      // We run a search in our data per keyword. i.e loop through each keyword/user input text
       inputList.forEach(function(input){
-
         input = input.trim()
 
-        //when no text in input field, ensure that it shows no results.
-        if(input === "") {
+        // When no text in search input field, show no results.
+        if (input === "") {
           this.setState({
             searchResults: []
           })
         }
+
         else {
+
+          // loop through the data and check if we have results where SITENAME matches user's input text.
+          // If so, push to queryResult array. If a particular site does not have its name match user's input,
+          // we then try to look at the site's categories and see if any categories match user's input
+
           this.state.siteData.forEach(function(site){
-            //if siteName contains input text, push to queryResult
+
+            // if our database have a siteName that contains users input text, push to queryResult
             if (site.siteName.toLowerCase().indexOf(input) !== -1) {
               queryResult.push(site);
             }
-            //if siteName does not contain input text, lets look at the site's categories and see if this site's category description contains the input text
+
+            // if our database does not have a siteName that matches users input text, lets look at the site's categories and see if this site's category description contains the input text
             else {
               var site_category_id = site.categoryIds //lists all category IDs associated to the site in Array format
-              console.log(site_category_id)
 
-              //we first loop through the site category IDs
+              // loop through this site category IDs
               site_category_id.forEach(function(cat){
-                console.log("site category no. :" + cat)
-                //next, we loop through the categories list
+
+                // Next, we loop through the categories list
                 categoryList.forEach(function(catlist){
-                  //if this site's category IDs matches an ID from the category list, we next need to validate if that category's description contain input text, if so, push to queryResult
+
+                  //if this site's category IDs matches an ID from the category list, we next need to validate if that category's description matches user's input text. if so, push to queryResult
                   if ( (cat === catlist.id) && (catlist.description.toLowerCase().indexOf(input) !== -1) ) {
-                    console.log("category no. : " + catlist.id)
                     queryResult.push(site)
                   }
+
                 })
               })
 
-              console.log(queryResult)
             }
 
           });
 
-          //if after all those checks, and queryResult is still empty, then display the 'no results' message
+          // if after all those checks, and queryResult is still empty, then display the 'no results' message
           if (queryResult.length === 0) {
-            var noResults = {"id": 10, "siteName": "No Results"}
-            queryResult.push(noResults)
+            $(function(){
+              $('.noResultsContainer').show();
+            })
+            // var noResults = {"id": 10, "siteUrl": "No Results"}
+            // queryResult.push(noResults)
+          }
+          else {
+              $('.noResultsContainer').hide();
           }
 
-          //update states of searchResults
+          // Update states of searchResults
           this.setState({
             searchInput: input,
             searchResults: queryResult

@@ -4,9 +4,10 @@ import '../App.css';
 
 class SearchForm extends Component {
 
-  getSearchInput() {
+  // For each user input, when input changes/updates, it fires the getSearchInput function
+  getSearchInput = () => {
     var input = this.titleInput.value; // Grab user input
-    this.props.searchInput(input);
+    this.props.searchInput(input); // Pass the user input to Main.js
   }
 
   render() {

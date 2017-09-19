@@ -115,6 +115,20 @@ a {
   margin-bottom: 25px;
 }
 
+.noResultsContainer {
+  text-align: center;
+  font-size: 18px;
+  color: rgb(149, 149, 149);
+  display: none;
+}
+
+.noResultsContainer_inner {
+  margin:0 auto;
+  border: 1px solid lightgrey;
+  width: 550px;
+  padding: 10px;
+}
+
 /********* FOOTER CONTAINER **********/
 
 .footer_container {
