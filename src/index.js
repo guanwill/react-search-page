@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './app/App';
+import Main from './app/Main';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -65,5 +65,5 @@ var categories = [
 ]
 
 
-ReactDOM.render(<App data={sites} categories={categories}/>, document.getElementById('root'));
+ReactDOM.render(<Main data={sites} categories={categories}/>, document.getElementById('root'));
 registerServiceWorker();
