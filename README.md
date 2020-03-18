@@ -1,3 +1,5 @@
+_**[Learning Activity - Not Maintained]**_
+
 # REACT SEARCH PAGE
 
 ## Objectives
